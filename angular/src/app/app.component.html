@@ -1,1 +1,97 @@
-<p>hello world</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
+  <title>Interactive Web Applications</title>
+</head>
+<body style="background-color: bisque">
+<div id="page-container">
+  <div id="content-wrap">
+    <div class="container">
+      <ng-container *ngIf="info.token; else loggedOut">
+        <ng-container *ngIf="isAdmin(); else user">
+          <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col">
+              <button class="btn" [routerLink]="['/home']">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                  <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                </svg>
+              </button>
+              <button type="button" class="btn btn-info" style="margin:5px;" [routerLink]="['/users']">Patients</button>
+              <a href="https://google.com" class="btn btn-info" style="margin:5px;">Go to Google</a>
+            </div>
+            <div class="col-md-3 text-end">
+              <div class="dropdown-container">
+                <div class="dropdown text-end" (click)='toggleUserMenu()'>
+                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                    <img src="assets/user.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                  </a>
+                  <ul class="dropdown-menu text-small" [ngClass]="{show: showUserMenu}" aria-labelledby="dropdownUser2">
+                    <a class="dropdown-item" href="/home" (click)="logout()">Logout</a>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </header>
+        </ng-container>
+        <ng-template #user>
+          <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col">
+              <button class="btn" [routerLink]="['/home']">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                  <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                </svg>
+              </button>
+              <button type="button" class="btn btn-info" style="margin:5px;" [routerLink]="['/appointments']">My appointments</button>
+              <button type="button" class="btn btn-info" style="margin:5px;" [routerLink]="['/appointments/addappointment']">Request an appointment</button>
+              <a href="https://google.com" class="btn btn-info" style="margin:5px;">Go to Google</a>
+            </div>
+            <div class="col-md-3 text-end">
+              <div class="dropdown-container">
+                <div class="dropdown text-end" (click)='toggleUserMenu()'>
+                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
+                    <img src="assets/user.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                  </a>
+                  <ul class="dropdown-menu text-small" [ngClass]="{show: showUserMenu}" aria-labelledby="dropdownUser1">
+                    <a class="dropdown-item" href="/home" (click)="logout()">Logout</a>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </header>
+        </ng-template>
+      </ng-container>
+      <ng-template #loggedOut>
+        <div class="container">
+          <div class="col" align="center">
+            <h1 class="display-1">Welcome to my Page</h1>
+            <br>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-info" style="margin:5px;" [routerLink]="['/auth/login']">Login</button>
+              <button type="button" class="btn btn-info" style="margin:5px;" [routerLink]="['signup']">Register</button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <div class="container">
+        <div class="col" align="center">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>Author: Jerzy Andrzejewski</p>
+  </footer>
+</div>
+</body>
+</html>
+
+
+
+
+

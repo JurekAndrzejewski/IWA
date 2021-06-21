@@ -1,0 +1,32 @@
+<div class="p-5 mb-4 rounded-3">
+  <h2 class="mb-4 fw-bold text-center">Request an appointment</h2>
+  <div class="row col-sm-6" style="max-width:350px;">
+    <form name="form" (ngSubmit)="f.form.valid && add(Date.value, Time.value, Address.value);" #f="ngForm" id="f" novalidate>
+      <div class="form-group">
+        <input type="text" class="form-control" name="Date" [(ngModel)]="form.Date" #Date="ngModel" placeholder="YYYY/MM/DD" style="margin: 5px"
+               pattern = "20[0-9][0-9]-((0[1-9])|(1[0-2]))-(([1-2][0-9])|(3[0-1])|(0[1-9]))" required/>
+        <div *ngIf="f.submitted && Date.invalid">
+          <div *ngIf="Date.errors.required">Date is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="Time" [(ngModel)]="form.Time" #Time="ngModel" placeholder="HH:MM 24hr TIME FORMAT" style="margin: 5px"
+               pattern = "^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$" required />
+        <div *ngIf="f.submitted && Time.invalid">
+          <div *ngIf="Time.errors.required">Time is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="Address" [(ngModel)]="form.Address" #Address="ngModel" placeholder="Address" style="margin: 5px"
+               required />
+        <div *ngIf="f.submitted && Address.invalid">
+          <div *ngIf="Address.errors.required">Address is required</div>
+        </div>
+      </div>
+      <button class="btn btn-primary">Request</button>
+      <div *ngIf="f.submitted && (Date.invalid || Time.invalid || Address.invalid)" class="alert alert-danger">
+        Check input
+      </div>
+    </form>
+    </div>
+</div>

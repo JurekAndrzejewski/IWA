@@ -1,0 +1,28 @@
+input[type=text] {
+  background-color: transparent;
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: darkred;
+  outline:0;
+}
+.textbox {
+  background-color: transparent;
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: darkred;
+  outline:0;
+}
+input[type=text1] {
+  background-color: transparent;
+  border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: darkred;
+  outline:0;
+}
+.list-group-item {
+  background-color: cornsilk;
+}
+.p-5{
+  background-color: cornsilk;
+}
+

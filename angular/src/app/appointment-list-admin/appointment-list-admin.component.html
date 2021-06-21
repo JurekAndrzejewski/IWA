@@ -1,0 +1,70 @@
+<div class="p-5 mb-4 rounded-3">
+  <h2 class="mb-4 fw-bold text-center">Add appointment</h2>
+  <div class="row col-sm-6" style="max-width:350px;">
+    <form name="form" (ngSubmit)="f.form.valid && add(Date.value, Time.value, Address.value);" #f="ngForm" id="f" novalidate>
+      <div class="form-group">
+        <input type="text" class="form-control" name="username" style="margin: 5px" value="{{username}}" readonly>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="Date" [(ngModel)]="form.Date" #Date="ngModel" placeholder="YYYY/MM/DD" style="margin: 5px"
+               pattern = "20[0-9][0-9]-((0[1-9])|(1[0-2]))-(([1-2][0-9])|(3[0-1])|(0[1-9]))" required/>
+        <div *ngIf="f.submitted && Date.invalid">
+          <div *ngIf="Date.errors.required">Date is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="Time" [(ngModel)]="form.Time" #Time="ngModel" placeholder="HH:MM 24hr TIME FORMAT" style="margin: 5px"
+               pattern = "^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$" required />
+        <div *ngIf="f.submitted && Time.invalid">
+          <div *ngIf="Time.errors.required">Time is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="Address" [(ngModel)]="form.Address" #Address="ngModel" placeholder="Address" style="margin: 5px"
+               required />
+        <div *ngIf="f.submitted && Address.invalid">
+          <div *ngIf="Address.errors.required">Address is required</div>
+        </div>
+      </div>
+      <button class="btn btn-primary">Add</button>
+      <div *ngIf="f.submitted && (Date.invalid || Time.invalid || Address.invalid)" class="alert alert-danger">
+        Check input
+      </div>
+    </form>
+  </div>
+</div>
+<input type="text" class="textbox" name="filter" value="" #Filter>
+<button class="btn" (click)="filter(Filter.value)" style = "margin: 5px">Search by address</button>
+<button class="btn" (click)="getAppointments()" style = "margin: 5px">Reset</button><br>
+<button class="btn" (click)="sort('idAsc')" style = "margin: 5px">Sort by ID in ascending order</button>
+<button class="btn" (click)="sort('idDesc')" style = "margin: 5px">Sort by ID in descending order</button>
+<button class="btn" (click)="sort('dateAsc')" style = "margin: 5px">Sort by date in ascending order</button>
+<button class="btn" (click)="sort('dateDesc')" style = "margin: 5px">Sort by date in descending order</button>
+<h2>Appointments</h2>
+<ul class="list-group">
+  <ul *ngFor="let appointment of appointmentList">
+    <li class="list-group-item">
+      <div class="container">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col col-lg-1"></div>
+          <div class="col" style="text-align: left">
+            ID: <input type="text1" class="textbox" name="id" value="{{appointment.id}}" readonly #ID><br>
+            Username: <input type="text1" class="textbox" name="username" value="{{appointment.username}}" readonly #Username><br>
+            Date: <input type="text1" class="textbox" name="date" value="{{ appointment.date }}" readonly #Date><br>
+            Time: <input type="text1" class="textbox" name="time" value="{{ appointment.time }}" readonly #Time><br>
+            Address: <input type="text1" class="textbox" name="address" value="{{ appointment.address }}" readonly #Address><br>
+            Receipt: <input type="text" class="textbox" name="receipt" value="{{ appointment.receipt }}"  #Receipt><br>
+            Accepted: <input type="text" class="textbox" name="accepted" value="{{ appointment.accepted }}" #Accepted><br>
+            Paid: <input type="text1" class="textbox" name="accepted" value="{{ appointment.paid }}" readonly #Paid><br>
+          </div>
+          <div class="col"></div>
+        </div>
+      </div>
+      <button class = "btn" title="update"
+              (click)="update(ID.value, Date.value, Time.value, Address.value, Username.value, Accepted.value, Receipt.value, Paid.value)">update
+      </button>
+      <button class="btn" title="delete" style="margin: 5px" (click)="delete(appointment)">delete</button>
+    </li>
+  </ul>
+</ul>

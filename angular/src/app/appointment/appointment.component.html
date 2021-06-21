@@ -1,0 +1,8 @@
+<span  *ngIf="appointment" class="badge"></span>
+<div *ngIf="appointment">
+  <input type="text" class="textbox" value="{{ appointment.date }}" #appointmentDate><br>
+  <input type="text" class="textbox" value="{{ appointment.time }}" #appointmentTime><br>
+  <input type="text" class="textbox" value="{{ appointment.address }}" #appointmentAddress><br>
+  <button title="update" [routerLink]="['/appointments']" (click)="update(appointment.id, appointmentDate.value, appointmentTime.value, appointmentAddress.value)">update</button>
+  <button title="delete" [routerLink]="['/appointments']" (click)="delete(appointment)">delete</button>
+</div>
